@@ -1,162 +1,108 @@
-<!DOCTYPE html>
-<html class="dark" lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>LexisEngine</title>
+<!-- Core Workspaces -->
+<section class="mb-12">
+    <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-secondary">apps</span>
+        <h2 class="text-xl font-semibold">Core Workspaces</h2>
+    </div>
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <div class="grid md:grid-cols-3 gap-6">
 
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-
-    <style>
-        @font-face {
-            font-family: 'Geist';
-            src: url('https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/Geist-Regular.woff2') format('woff2');
-        }
-
-        body {
-            font-family: 'Geist', sans-serif;
-            background: #0b1326;
-            color: #dae2fd;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .glass-panel {
-            background: rgba(23, 31, 51, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(144, 143, 160, 0.2);
-        }
-
-        .ai-glow {
-            box-shadow: 0 0 20px rgba(79, 219, 200, 0.1);
-        }
-    </style>
-
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        background: "#0b1326",
-                        surface: "#171f33",
-                        primary: "#c0c1ff",
-                        secondary: "#4fdbc8",
-                        outline: "#908fa0",
-                        "on-surface": "#dae2fd",
-                        "on-surface-variant": "#c7c4d7"
-                    }
-                }
-            }
-        };
-    </script>
-</head>
-
-<body class="bg-background text-on-surface">
-    <header class="fixed top-0 left-0 right-0 h-16 bg-surface/80 backdrop-blur-md border-b border-outline/20 flex items-center justify-between px-6">
-        <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-primary">dashboard</span>
-            <h1 class="text-2xl font-bold text-primary">LexisEngine</h1>
-        </div>
-
-        <span class="text-xs uppercase tracking-widest text-secondary">
-            Navigation Hub
-        </span>
-    </header>
-
-    <main class="max-w-5xl mx-auto px-6 pt-28 pb-12">
-        <div class="mb-12">
-            <p class="text-secondary text-xs uppercase tracking-[0.25em] mb-2">
-                Platform Index
+        <a href="hiring.html"
+           class="glass-panel rounded-xl p-6 hover:border-secondary/40 transition-all">
+            <span class="material-symbols-outlined text-secondary text-4xl">
+                group
+            </span>
+            <h3 class="text-xl font-semibold mt-4">Hiring Intelligence</h3>
+            <p class="text-on-surface-variant mt-2">
+                Candidate screening, interviews and hiring insights.
             </p>
+        </a>
 
-            <h2 class="text-5xl font-bold leading-tight">
-                Access Core
-                <span class="text-primary">LexisEngine</span>
-                Modules
-            </h2>
-
-            <p class="mt-4 text-on-surface-variant max-w-2xl">
-                Select a workspace to continue. Each module provides a dedicated
-                experience for hiring intelligence, legal operations, and product management.
+        <a href="legal.html"
+           class="glass-panel rounded-xl p-6 hover:border-primary/40 transition-all">
+            <span class="material-symbols-outlined text-primary text-4xl">
+                gavel
+            </span>
+            <h3 class="text-xl font-semibold mt-4">Legal Workspace</h3>
+            <p class="text-on-surface-variant mt-2">
+                Contracts, compliance and legal intelligence.
             </p>
+        </a>
+
+        <a href="product.html"
+           class="glass-panel rounded-xl p-6 hover:border-secondary/40 transition-all">
+            <span class="material-symbols-outlined text-secondary text-4xl">
+                inventory_2
+            </span>
+            <h3 class="text-xl font-semibold mt-4">Product Intelligence</h3>
+            <p class="text-on-surface-variant mt-2">
+                Roadmaps, PRDs and product strategy tools.
+            </p>
+        </a>
+
+    </div>
+</section>
+
+<!-- Suggested For You (Dummy) -->
+<section class="mb-12">
+    <h2 class="text-xl font-semibold mb-4">Suggested For You</h2>
+
+    <div class="grid md:grid-cols-2 gap-4">
+        <div class="glass-panel p-5 rounded-xl">
+            ✨ Analyze Engineering Team Structure
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6">
-
-            <a href="hiring.html"
-               class="glass-panel ai-glow rounded-2xl p-6 hover:border-secondary/40 hover:-translate-y-1 transition-all duration-300">
-                <span class="material-symbols-outlined text-secondary text-4xl mb-4 block">
-                    group
-                </span>
-
-                <h3 class="text-xl font-semibold mb-2">
-                    Hiring Intelligence
-                </h3>
-
-                <p class="text-on-surface-variant text-sm mb-6">
-                    Candidate evaluation, interview intelligence, skill analysis,
-                    and hiring recommendations.
-                </p>
-
-                <div class="flex items-center gap-2 text-secondary text-sm">
-                    Open Module
-                    <span class="material-symbols-outlined text-base">
-                        arrow_forward
-                    </span>
-                </div>
-            </a>
-
-            <a href="legal.html"
-               class="glass-panel rounded-2xl p-6 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300">
-                <span class="material-symbols-outlined text-primary text-4xl mb-4 block">
-                    gavel
-                </span>
-
-                <h3 class="text-xl font-semibold mb-2">
-                    Legal Workspace
-                </h3>
-
-                <p class="text-on-surface-variant text-sm mb-6">
-                    Contracts, compliance workflows, legal research,
-                    and document intelligence.
-                </p>
-
-                <div class="flex items-center gap-2 text-primary text-sm">
-                    Open Module
-                    <span class="material-symbols-outlined text-base">
-                        arrow_forward
-                    </span>
-                </div>
-            </a>
-
-            <a href="product.html"
-               class="glass-panel rounded-2xl p-6 hover:border-secondary/40 hover:-translate-y-1 transition-all duration-300">
-                <span class="material-symbols-outlined text-secondary text-4xl mb-4 block">
-                    inventory_2
-                </span>
-
-                <h3 class="text-xl font-semibold mb-2">
-                    Product Intelligence
-                </h3>
-
-                <p class="text-on-surface-variant text-sm mb-6">
-                    Roadmaps, requirements, analytics, and product
-                    decision support tools.
-                </p>
-
-                <div class="flex items-center gap-2 text-secondary text-sm">
-                    Open Module
-                    <span class="material-symbols-outlined text-base">
-                        arrow_forward
-                    </span>
-                </div>
-            </a>
-
+        <div class="glass-panel p-5 rounded-xl">
+            ✨ Generate Vendor Contract Summary
         </div>
-    </main>
-</body>
-</html>
+
+        <div class="glass-panel p-5 rounded-xl">
+            ✨ Create Product Launch Checklist
+        </div>
+
+        <div class="glass-panel p-5 rounded-xl">
+            ✨ Review Hiring Funnel Performance
+        </div>
+    </div>
+</section>
+
+<!-- Marketplace (Dummy) -->
+<section>
+    <h2 class="text-xl font-semibold mb-4">Marketplace</h2>
+
+    <div class="grid md:grid-cols-4 gap-4">
+
+        <div class="glass-panel p-5 rounded-xl">
+            Resume Parser
+        </div>
+
+        <div class="glass-panel p-5 rounded-xl">
+            Contract Analyzer
+        </div>
+
+        <div class="glass-panel p-5 rounded-xl">
+            AI Interviewer
+        </div>
+
+        <div class="glass-panel p-5 rounded-xl">
+            PRD Generator
+        </div>
+
+        <div class="glass-panel p-5 rounded-xl">
+            Compliance Copilot
+        </div>
+
+        <div class="glass-panel p-5 rounded-xl">
+            Customer Research Agent
+        </div>
+
+        <div class="glass-panel p-5 rounded-xl">
+            Sales Intelligence
+        </div>
+
+        <div class="glass-panel p-5 rounded-xl">
+            Knowledge Assistant
+        </div>
+
+    </div>
+</section>
