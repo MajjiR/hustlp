@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>LexisEngine | Hiring Intelligence</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <style>
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/Geist-Regular.woff2') format('woff2');
+        }
+        body {
+            font-family: 'Geist', sans-serif;
+            background-color: #0b1326;
+            color: #dae2fd;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+        .glass-panel, .glass-card {
+            background: rgba(23, 31, 51, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(144, 143, 160, 0.2);
+        }
+        .insight-glow, .ai-glow {
+            box-shadow: 0 0 20px rgba(79, 219, 200, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        .skill-radar-svg { transform: rotate(-18deg); }
+        .animate-dash {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 3s ease-in-out forwards;
+        }
+        @keyframes dash { to { stroke-dashoffset: 0; } }
+        .waveform-bar { transition: height 0.3s ease; }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "surface-container-highest": "#2d3449",
+                        "surface-container": "#171f33",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-primary-fixed": "#07006c",
+                        "inverse-surface": "#dae2fd",
+                        "tertiary": "#c4c7c9",
+                        "on-primary": "#1000a9",
+                        "secondary-fixed-dim": "#4fdbc8",
+                        "outline": "#908fa0",
+                        "on-error": "#690005",
+                        "on-surface": "#dae2fd",
+                        "tertiary-container": "#8e9193",
+                        "on-secondary": "#003731",
+                        "surface-tint": "#c0c1ff",
+                        "error-container": "#93000a",
+                        "surface-container-low": "#131b2e",
+                        "on-surface-variant": "#c7c4d7",
+                        "error": "#ffb4ab",
+                        "secondary": "#4fdbc8",
+                        "on-tertiary-container": "#272a2c",
+                        "surface-variant": "#2d3449",
+                        "on-secondary-fixed": "#00201c",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#005048",
+                        "inverse-primary": "#494bd6",
+                        "on-primary-container": "#0d0096",
+                        "surface-container-lowest": "#060e20",
+                        "inverse-on-surface": "#283044",
+                        "on-secondary-container": "#003f38",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "background": "#0b1326",
+                        "surface-dim": "#0b1326",
+                        "outline-variant": "#464554",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-background": "#dae2fd",
+                        "secondary-fixed": "#71f8e4",
+                        "secondary-container": "#04b4a2",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-tertiary": "#2d3133",
+                        "surface-bright": "#31394d",
+                        "primary": "#c0c1ff",
+                        "primary-fixed": "#e1e0ff",
+                        "surface-container-high": "#222a3d",
+                        "primary-container": "#8083ff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "surface": "#0b1326"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "4px",
+                        "base": "4px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "container-margin": "16px",
+                        "lg": "24px",
+                        "gutter": "12px"
+                    },
+                    "fontFamily": {
+                        "code-sm": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "headline-sm": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "body-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+    <div id="root"></div>
+
+    <!-- Load React and other libraries via CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/history@5/umd/history.development.js"></script>
+    <script src="https://unpkg.com/react-router@6.3.0/umd/react-router.development.js"></script>
+    <script src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { createRoot } = ReactDOM;
+        const { MemoryRouter, Routes, Route, Link, useNavigate, useLocation } = ReactRouterDOM;
+
+        // --- Shared Components ---
+
+        const TopAppBar = ({ title = "LexisEngine", showBack = false, userImage }) => {
+            const navigate = useNavigate();
+            return (
+                <header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 flex justify-between items-center px-container-margin h-16 w-full z-50 fixed top-0">
+                    <div class="flex items-center gap-sm">
+                        {showBack ? (
+                            <span class="material-symbols-outlined text-primary cursor-pointer" onClick={() => navigate(-1)}>arrow_back</span>
+                        ) : (
+                            <span class="material-symbols-outlined text-primary">menu</span>
+                        )}
+                        <h1 class="font-headline-md text-headline-md font-bold tracking-tight text-primary">{title}</h1>
+                    </div>
+                    <div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden">
+                        <img 
+                            alt="User Profile" 
+                            class="w-full h-full object-cover" 
+                            src={userImage || "https://lh3.googleusercontent.com/aida-public/AB6AXuC9u2tzQVKo3Z2COvjR1UPfIpcLb8ut6_PoHpdK5t9UOVGtz8K7LKF4VFeV4537dCST0ocda6N6qW2TkIMidxumQv2rnF0lFwaJ20RDAwNH_97Vcv2Y2bn7H3KCDQjxuRaVsFFnfqIUpfMXaJhG1KGfevcvtCWVL603N7fDjdqUURHV1R73p2capiIshk9GSK_Jo9cREIXmSnlFooFWexQ8zyycpwGNNCDq4K6L15dPlRYtNels9_IFkePEaHgw0at0n1GPtfwbwjY"}
+                        />
+                    </div>
+                </header>
+            );
+        };
+
+        const BottomNav = () => {
+            const location = useLocation();
+            const navItems = [
+                { path: '/', label: 'Dashboard', icon: 'dashboard' },
+                { path: '/comparison', label: 'Comparison', icon: 'auto_graph' },
+                { path: '/skills', label: 'Skills', icon: 'inventory_2' },
+                { path: '/live', label: 'Live AI', icon: 'gavel' },
+                { path: '#', label: 'Clients', icon: 'group' },
+            ];
+
+            return (
+                <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-sm bg-surface-container/95 backdrop-blur-xl border-t border-outline-variant/30 rounded-t-xl">
+                    {navItems.map((item) => (
+                        <Link 
+                            key={item.label}
+                            to={item.path} 
+                            class={`flex flex-col items-center justify-center font-label-caps text-label-caps transition-all ${
+                                location.pathname === item.path ? 'text-secondary font-bold scale-110' : 'text-on-surface-variant/70'
+                            }`}
+                        >
+                            <span class={`material-symbols-outlined ${location.pathname === item.path ? 'fill-icon' : ''}`}>{item.icon}</span>
+                            <span>{item.label}</span>
+                        </Link>
+                    ))}
+                </nav>
+            );
+        };
+
+        // --- Screens ---
+
+        const CandidateOverview = () => {
+            const navigate = useNavigate();
+            return (
+                <div className="pb-24">
+                    <TopAppBar showBack={true} />
+                    <main class="pt-20 px-container-margin flex flex-col gap-lg">
+                        <section class="flex flex-col gap-md">
+                            <div class="flex items-start justify-between">
+                                <div class="flex flex-col">
+                                    <h2 class="font-display-lg text-display-lg text-on-surface">Rahul Sharma</h2>
+                                    <p class="font-body-lg text-body-lg text-on-surface-variant">Software Engineer • 3 Years Experience</p>
+                                </div>
+                                <div class="bg-secondary/10 border border-secondary/30 px-sm py-xs rounded-full flex items-center gap-xs">
+                                    <span class="material-symbols-outlined text-[14px] text-secondary fill-icon">verified</span>
+                                    <span class="font-label-caps text-label-caps text-secondary">PROCEED TO TECHNICAL</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-sm">
+                                <div class="glass-panel p-md rounded-xl border border-outline-variant/30 flex flex-col gap-xs">
+                                    <span class="font-label-caps text-label-caps text-on-surface-variant">CANDIDATE SCORE</span>
+                                    <div class="flex items-baseline gap-xs">
+                                        <span class="font-display-lg text-display-lg text-primary">87</span>
+                                        <span class="font-body-md text-body-md text-outline">/ 100</span>
+                                    </div>
+                                </div>
+                                <div class="glass-panel p-md rounded-xl border border-outline-variant/30 flex flex-col gap-xs">
+                                    <span class="font-label-caps text-label-caps text-on-surface-variant">RESUME MATCH</span>
+                                    <div class="flex items-baseline gap-xs">
+                                        <span class="font-display-lg text-display-lg text-secondary">92%</span>
+                                    </div>
+                                </div>
+                                <div class="glass-panel col-span-2 p-md rounded-xl border border-outline-variant/30 flex justify-between items-center cursor-pointer" onClick={() => navigate('/live')}>
+                                    <div class="flex flex-col gap-xs">
+                                        <span class="font-label-caps text-label-caps text-on-surface-variant">INTERVIEW STATUS</span>
+                                        <span class="font-headline-sm text-headline-sm">Round 1 Complete</span>
+                                    </div>
+                                    <span class="material-symbols-outlined text-secondary text-[32px] fill-icon">check_circle</span>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="glass-panel rounded-xl border-l-4 border-l-secondary overflow-hidden">
+                            <div class="p-md flex flex-col gap-sm">
+                                <div class="flex items-center gap-sm">
+                                    <span class="material-symbols-outlined text-secondary">auto_awesome</span>
+                                    <h3 class="font-headline-sm text-headline-sm">Experience Summary</h3>
+                                </div>
+                                <p class="font-body-lg text-body-lg italic text-on-surface leading-relaxed">
+                                    "Led a team of 4 to build an inventory system, reducing processing time by 35%."
+                                </p>
+                                <div class="h-[1px] bg-outline-variant/30 w-full"></div>
+                                <div class="flex flex-wrap gap-sm pt-xs">
+                                    <span class="bg-primary/10 text-primary font-code-sm text-code-sm px-sm py-xs border border-primary/20 rounded">Leadership</span>
+                                    <span class="bg-primary/10 text-primary font-code-sm text-code-sm px-sm py-xs border border-primary/20 rounded">Backend</span>
+                                    <span class="bg-primary/10 text-primary font-code-sm text-code-sm px-sm py-xs border border-primary/20 rounded">System Design</span>
+                                    <span class="bg-primary/10 text-primary font-code-sm text-code-sm px-sm py-xs border border-primary/20 rounded">Problem Solving</span>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="bg-error-container/20 border border-error/20 rounded-xl p-md flex items-center gap-md">
+                            <span class="material-symbols-outlined text-error">warning</span>
+                            <div class="flex flex-col">
+                                <span class="font-label-caps text-label-caps text-error">CRITICAL INSIGHT</span>
+                                <span class="font-body-md text-body-md text-on-error-container">Limited Cloud Experience</span>
+                            </div>
+                        </section>
+                        <section class="flex flex-col gap-sm">
+                            <h3 class="font-label-caps text-label-caps text-on-surface-variant px-xs">DETAILED SKILL MATRIX</h3>
+                            <div class="flex flex-col gap-xs">
+                                {["Leadership Capability", "Backend Architecture", "System Design Proficiency", "Complex Problem Solving"].map(skill => (
+                                    <div key={skill} class="glass-panel p-md flex items-center justify-between">
+                                        <span class="font-body-md text-body-md">{skill}</span>
+                                        <span class="material-symbols-outlined text-secondary fill-icon">check_box</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    </main>
+                    <BottomNav />
+                </div>
+            );
+        };
+
+        const ComparisonDashboard = () => {
+            const navigate = useNavigate();
+            return (
+                <div className="pb-24">
+                    <TopAppBar />
+                    <main class="pt-20 px-container-margin space-y-lg">
+                        <section class="mt-md">
+                            <p class="font-label-caps text-label-caps text-secondary mb-xs">INTELLIGENCE LAYER</p>
+                            <h2 class="font-display-lg text-display-lg leading-tight">A recruiter doesn't get interview notes. <span class="text-primary">They get hiring intelligence.</span></h2>
+                        </section>
+                        <div class="glass-panel rounded-xl p-md ai-glow border-l-4 border-secondary">
+                            <div class="flex justify-between items-start mb-md">
+                                <div>
+                                    <h3 class="font-headline-sm text-headline-sm text-on-surface">Rahul</h3>
+                                    <p class="font-body-md text-body-md text-on-surface-variant">Senior Product Designer Candidate</p>
+                                </div>
+                                <span class="bg-secondary/10 text-secondary font-label-caps text-label-caps px-sm py-xs rounded border border-secondary/20">MOVE TO ROUND 2</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-md mb-lg">
+                                {[
+                                    { label: 'ROLE FIT', value: 91, color: 'bg-primary' },
+                                    { label: 'TECH FIT', value: 88, color: 'bg-secondary' },
+                                    { label: 'CULTURE FIT', value: 85, color: 'bg-on-surface-variant' }
+                                ].map(stat => (
+                                    <div key={stat.label} class="space-y-xs">
+                                        <p class="font-label-caps text-label-caps text-on-surface-variant">{stat.label}</p>
+                                        <div class="flex items-end gap-xs">
+                                            <span class={`font-headline-md text-headline-md ${stat.label === 'ROLE FIT' ? 'text-primary' : stat.label === 'TECH FIT' ? 'text-secondary' : 'text-on-surface'}`}>{stat.value}%</span>
+                                            <div class="h-1 w-full bg-surface-variant rounded-full mb-2 overflow-hidden">
+                                                <div class={`h-full ${stat.color}`} style={{width: `${stat.value}%`}}></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                                <div class="space-y-xs">
+                                    <p class="font-label-caps text-label-caps text-on-surface-variant">LEADERSHIP</p>
+                                    <div class="flex items-center gap-xs mt-1">
+                                        <span class="material-symbols-outlined text-secondary text-lg fill-icon">star</span>
+                                        <span class="font-label-caps text-label-caps text-on-surface">HIGH POTENTIAL</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button 
+                                onClick={() => navigate('/')}
+                                class="w-full bg-primary text-on-primary-container font-label-caps text-label-caps py-md rounded-lg flex justify-center items-center gap-sm active:scale-95 transition-all"
+                            >
+                                <span class="material-symbols-outlined text-[18px]">verified</span>
+                                VIEW FULL INTELLIGENCE REPORT
+                            </button>
+                        </div>
+                        <section class="space-y-md">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-headline-sm text-headline-sm">Candidate Comparison</h3>
+                                <span class="font-code-sm text-code-sm text-secondary">3 Active Candidates</span>
+                            </div>
+                            <div class="glass-panel rounded-xl overflow-hidden border border-outline-variant/30">
+                                <div class="overflow-x-auto custom-scrollbar">
+                                    <table class="w-full text-left border-collapse">
+                                        <thead>
+                                            <tr class="bg-surface-variant/50">
+                                                <th class="p-md font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/30">Candidate</th>
+                                                <th class="p-md font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/30">Fit</th>
+                                                <th class="p-md font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/30">Tech</th>
+                                                <th class="p-md font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/30">Comm</th>
+                                                <th class="p-md font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/30">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-outline-variant/20">
+                                            {[
+                                                { name: 'Rahul', initial: 'R', fit: '91%', tech: '88%', comm: '94%', action: 'ADVANCE', color: 'bg-primary/20', textColor: 'text-primary' },
+                                                { name: 'Priya', initial: 'P', fit: '84%', tech: '92%', comm: '75%', action: 'REVIEW', color: 'bg-on-surface-variant/20', textColor: 'text-on-surface-variant' },
+                                                { name: 'Arjun', initial: 'A', fit: '72%', tech: '70%', comm: '78%', action: 'REJECT', color: 'bg-error-container/20', textColor: 'text-error' },
+                                            ].map(cand => (
+                                                <tr key={cand.name} className="hover:bg-surface-variant/20 transition-colors cursor-pointer" onClick={() => navigate('/skills')}>
+                                                    <td class="p-md">
+                                                        <div class="flex items-center gap-sm">
+                                                            <div class={`w-8 h-8 rounded-full ${cand.color} flex items-center justify-center ${cand.textColor} font-bold text-xs`}>{cand.initial}</div>
+                                                            <span class="font-body-md text-body-md font-semibold">{cand.name}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="p-md font-code-sm text-code-sm text-primary">{cand.fit}</td>
+                                                    <td class="p-md font-code-sm text-code-sm">{cand.tech}</td>
+                                                    <td class="p-md font-code-sm text-code-sm">{cand.comm}</td>
+                                                    <td class="p-md">
+                                                        <span class={`text-[10px] font-label-caps px-2 py-1 rounded-full ${cand.name === 'Arjun' ? 'bg-error-container/30 text-error' : 'bg-secondary/10 text-secondary'} border border-secondary/30`}>{cand.action}</span>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="space-y-sm">
+                            <h4 class="font-label-caps text-label-caps text-on-surface-variant">CROSS-CANDIDATE INSIGHTS</h4>
+                            <div class="flex flex-wrap gap-sm">
+                                <div class="bg-secondary/5 border border-secondary/20 rounded-full px-md py-xs flex items-center gap-xs">
+                                    <span class="material-symbols-outlined text-secondary text-sm">trending_up</span>
+                                    <span class="font-code-sm text-code-sm text-secondary">Rahul has highest comms potential</span>
+                                </div>
+                                <div class="bg-primary/5 border border-primary/20 rounded-full px-md py-xs flex items-center gap-xs">
+                                    <span class="material-symbols-outlined text-primary text-sm">psychology</span>
+                                    <span class="font-code-sm text-code-sm text-primary">Priya leads in technical depth</span>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <BottomNav />
+                </div>
+            );
+        };
+
+        const SkillsIntelligence = () => {
+            const [barsAnimated, setBarsAnimated] = useState(false);
+            useEffect(() => {
+                const timer = setTimeout(() => setBarsAnimated(true), 300);
+                return () => clearTimeout(timer);
+            }, []);
+
+            return (
+                <div className="pb-24">
+                    <TopAppBar userImage="https://lh3.googleusercontent.com/aida-public/AB6AXuD2tp0dbmHKSiWn6J-7YbD7wjCeop1ajRyesFVovGaLGi9CskKInayXVT66nvC06JAr7-2-NvVebk-FZCq8mt-8qvEn9U4nyDavIol0bAYn1F0ruWTrG17RkNi2E5xI_Bwt5HB1SR22oGWq-vWAYYodmtGi-JNw80mm7LmKy-N979eTaZ0EQnMBTubE4tvmuGqZkt0o8vW12oSNTq1xZhhtvzYZlHhCOUUaZhbA77XxyHl_ZMkdaiX0rK9WmiXnTIfI9DHetqL0Ars" />
+                    <main class="pt-20 px-container-margin space-y-md">
+                        <section class="mt-4">
+                            <div class="flex justify-between items-end">
+                                <div>
+                                    <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">Intelligence Profile</span>
+                                    <h2 class="font-display-lg text-display-lg text-on-surface mt-xs">Rahul Sharma</h2>
+                                </div>
+                                <div class="text-right">
+                                    <span class="font-code-sm text-code-sm text-on-surface-variant block">CONFIDENCE</span>
+                                    <span class="font-display-lg text-display-lg text-primary">87<span class="text-headline-sm">%</span></span>
+                                </div>
+                            </div>
+                            <div class="w-full bg-surface-container-highest h-1 rounded-full mt-sm overflow-hidden">
+                                <div class="h-full bg-secondary shadow-[0_0_8px_rgba(79,219,200,0.5)] transition-all duration-1000 ease-out" style={{width: barsAnimated ? '87%' : '0%'}}></div>
+                            </div>
+                        </section>
+                        <section class="glass-panel rounded-xl p-md flex flex-col items-center justify-center relative overflow-hidden">
+                            <h3 class="font-label-caps text-label-caps text-on-surface-variant mb-lg self-start">CORE DIMENSIONS</h3>
+                            <div class="relative w-64 h-64 flex items-center justify-center">
+                                <svg class="w-full h-full skill-radar-svg" viewbox="0 0 200 200">
+                                    <circle cx="100" cy="100" fill="none" r="80" stroke="#334155" stroke-width="0.5"></circle>
+                                    <circle cx="100" cy="100" fill="none" r="60" stroke="#334155" stroke-width="0.5"></circle>
+                                    <circle cx="100" cy="100" fill="none" r="40" stroke="#334155" stroke-width="0.5"></circle>
+                                    <circle cx="100" cy="100" fill="none" r="20" stroke="#334155" stroke-width="0.5"></circle>
+                                    <line stroke="#334155" stroke-width="0.5" x1="100" x2="100" y1="20" y2="180"></line>
+                                    <line stroke="#334155" stroke-width="0.5" x1="20" x2="180" y1="100" y2="100"></line>
+                                    <polygon class="animate-dash" fill="rgba(192, 193, 255, 0.2)" points="100,30 170,100 100,160 50,100" stroke="#c0c1ff" stroke-width="2"></polygon>
+                                    <polygon fill="rgba(79, 219, 200, 0.15)" points="100,45 150,100 100,140 60,100" stroke="#4fdbc8" stroke-dasharray="4 2" stroke-width="1.5"></polygon>
+                                </svg>
+                                <div class="absolute -top-2 left-1/2 -translate-x-1/2 font-label-caps text-[10px] text-primary">SYSTEM ARCHITECTURE</div>
+                                <div class="absolute top-1/2 -right-4 -translate-y-1/2 font-label-caps text-[10px] text-secondary rotate-90">LEADERSHIP</div>
+                                <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 font-label-caps text-[10px] text-primary">DATA ENGINEERING</div>
+                                <div class="absolute top-1/2 -left-6 -translate-y-1/2 font-label-caps text-[10px] text-secondary -rotate-90">COMMUNICATION</div>
+                            </div>
+                            <div class="flex gap-md mt-lg">
+                                <div class="flex items-center gap-xs">
+                                    <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                    <span class="font-label-caps text-[11px] text-on-surface">TECHNICAL</span>
+                                </div>
+                                <div class="flex items-center gap-xs">
+                                    <div class="w-2 h-2 bg-secondary rounded-full"></div>
+                                    <span class="font-label-caps text-[11px] text-on-surface">SOFT SKILLS</span>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="grid grid-cols-2 gap-md">
+                            <section class="col-span-2 glass-panel rounded-xl p-md space-y-sm">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-sm">
+                                        <span class="material-symbols-outlined text-primary">terminal</span>Technical
+                                    </h3>
+                                    <span class="font-code-sm text-code-sm text-primary bg-primary/10 px-sm py-xs rounded">Expert</span>
+                                </div>
+                                <div class="flex flex-wrap gap-sm pt-sm">
+                                    {["Backend Development", "System Design", "SQL", "Python"].map(t => (
+                                        <span key={t} class="bg-surface-container-highest border border-outline-variant/30 text-on-surface px-sm py-1 rounded-full font-code-sm text-code-sm">{t}</span>
+                                    ))}
+                                </div>
+                            </section>
+                            <section class="col-span-2 glass-panel rounded-xl p-md border-l-4 border-l-secondary insight-glow">
+                                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-md flex items-center gap-sm">
+                                    <span class="material-symbols-outlined text-secondary">psychology</span>Soft Skills
+                                </h3>
+                                <div class="space-y-md">
+                                    {[
+                                        { l: 'Leadership', v: 92 },
+                                        { l: 'Communication', v: 85 },
+                                        { l: 'Adaptability', v: 95 }
+                                    ].map(s => (
+                                        <div key={s.l} class="space-y-xs">
+                                            <div class="flex justify-between font-label-caps text-[11px]">
+                                                <span>{s.l}</span><span>{s.v}%</span>
+                                            </div>
+                                            <div class="w-full bg-surface-container h-1 rounded-full">
+                                                <div class="bg-secondary h-full rounded-full transition-all duration-1000 ease-out" style={{width: barsAnimated ? `${s.v}%` : '0%'}}></div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        </div>
+                        <section class="glass-panel rounded-xl p-md bg-gradient-to-br from-surface-container to-surface-container-lowest">
+                            <div class="flex items-start gap-md">
+                                <div class="p-sm bg-secondary/10 rounded-lg">
+                                    <span class="material-symbols-outlined text-secondary fill-icon">auto_awesome</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-headline-sm text-headline-sm text-on-surface">Skill Synthesis</h4>
+                                    <p class="font-body-md text-body-md text-on-surface-variant mt-xs">
+                                        Rahul shows a rare high-correlation between <span class="text-secondary font-semibold italic">System Design</span> and <span class="text-secondary font-semibold italic">Leadership</span>, making him ideal for Technical Architect roles.
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="w-full mt-md py-sm border border-secondary text-secondary font-label-caps text-label-caps rounded-full hover:bg-secondary/10 transition-colors uppercase">
+                                View Full Intelligence Report
+                            </button>
+                        </section>
+                    </main>
+                    <BottomNav />
+                </div>
+            );
+        };
+
+        const InterviewIntelligence = () => {
+            const [waveHeights, setWaveHeights] = useState(Array.from({length: 40}, () => Math.floor(Math.random() * 80) + 20));
+
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    setWaveHeights(prev => prev.map(h => Math.floor(Math.random() * 80) + 20));
+                }, 200);
+                return () => clearInterval(interval);
+            }, []);
+
+            return (
+                <div className="pb-24">
+                    <TopAppBar userImage="https://lh3.googleusercontent.com/aida-public/AB6AXuDBTH82pKsxiQPvhA296PnBVQsxoDLW2Jy5l7lTZNRJ4XJ1kdLptcOqi0Q0FH8B_l_ILxneIl_S2ftwE6S2w_tVaH-Ik-N3kyUvK74_FqzisEfSZA1hxe0JM82tkTrpaN8MdeCq8EFj0xohGTeI3lCcql34DakpkRB8qDHIBz68_1V8pfI526Md14XRh_cSxqd9Q9S9K0Lf-ah1CSGQLI3zEPFMyMPRJElxYv_TGOSczAOSXo2rCTk_csxLfRSrOAU7RJNqwS5UXzA" />
+                    <main class="flex-grow pt-20 pb-24 px-container-margin">
+                        <section class="mb-lg">
+                            <div class="flex items-center gap-xs mb-xs">
+                                <span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">Live Analysis</span>
+                                <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                            </div>
+                            <h2 class="font-display-lg text-display-lg mb-xs">Interview Intelligence</h2>
+                            <p class="font-body-md text-on-surface-variant">Senior Systems Architect Interview - Session ID: 4829-X</p>
+                        </section>
+                        <div class="glass-card rounded-xl p-md mb-lg relative overflow-hidden">
+                            <div class="flex items-end justify-between h-12 gap-[2px]">
+                                {waveHeights.map((h, i) => (
+                                    <div key={i} className={`waveform-bar w-1 ${i < 25 ? 'bg-secondary' : 'bg-primary/30'} rounded-full`} style={{height: `${h}%`}}></div>
+                                ))}
+                            </div>
+                            <div class="flex justify-between mt-sm">
+                                <span class="font-code-sm text-code-sm text-on-surface-variant">08:42</span>
+                                <span class="font-code-sm text-code-sm text-secondary">AI PROCESSING ACTIVE</span>
+                                <span class="font-code-sm text-code-sm text-on-surface-variant">14:00</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-md mb-lg">
+                            <div class="glass-card rounded-xl p-md flex flex-col items-center justify-center text-center">
+                                <span class="font-label-caps text-label-caps text-on-surface-variant mb-xs">Confidence</span>
+                                <div class="text-secondary font-headline-md text-headline-md">High</div>
+                                <div class="w-full bg-surface-variant h-1 rounded-full mt-sm">
+                                    <div class="bg-secondary h-full w-[88%] rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="glass-card rounded-xl p-md flex flex-col items-center justify-center text-center">
+                                <span class="font-label-caps text-label-caps text-on-surface-variant mb-xs">Comm. Score</span>
+                                <div class="text-primary font-headline-md text-headline-md">94%</div>
+                                <div class="w-full bg-surface-variant h-1 rounded-full mt-sm">
+                                    <div class="bg-primary h-full w-[94%] rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <section class="mb-lg">
+                            <h3 class="font-headline-sm text-headline-sm mb-md flex items-center gap-sm">
+                                <span class="material-symbols-outlined text-secondary">psychology</span>Conversation Analysis
+                            </h3>
+                            <div class="space-y-md">
+                                <div class="glass-card rounded-xl border-l-4 border-l-secondary p-md">
+                                    <div class="flex items-center gap-sm mb-sm">
+                                        <span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+                                        <span class="font-label-caps text-label-caps text-secondary">Strong Answers</span>
+                                    </div>
+                                    <div class="flex flex-wrap gap-sm">
+                                        <span class="bg-secondary/10 text-secondary border border-secondary/20 px-sm py-xs rounded-full font-code-sm text-code-sm">Problem Solving</span>
+                                        <span class="bg-secondary/10 text-secondary border border-secondary/20 px-sm py-xs rounded-full font-code-sm text-code-sm">Ownership</span>
+                                    </div>
+                                    <div class="mt-md p-sm bg-surface-container-lowest/50 rounded-lg border border-outline-variant/20 italic font-body-md text-on-surface-variant">
+                                        "We didn't just fix the bug; we rebuilt the alerting pipeline to prevent entire classes of similar failures."
+                                    </div>
+                                </div>
+                                <div class="glass-card rounded-xl border-l-4 border-l-error p-md">
+                                    <div class="flex items-center gap-sm mb-sm">
+                                        <span class="material-symbols-outlined text-error text-[20px]">warning</span>
+                                        <span class="font-label-caps text-label-caps text-error">Weak Answers</span>
+                                    </div>
+                                    <div class="flex flex-wrap gap-sm">
+                                        <span class="bg-error/10 text-error border border-error/20 px-sm py-xs rounded-full font-code-sm text-code-sm">Cloud Infrastructure</span>
+                                    </div>
+                                    <p class="mt-sm font-body-md text-on-surface-variant">Candidate struggled to differentiate between regional and zonal redundancy strategies.</p>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="mb-lg">
+                            <h3 class="font-headline-sm text-headline-sm mb-md flex items-center gap-sm">
+                                <span class="material-symbols-outlined text-primary">diversity_3</span>Behavioral Insights
+                            </h3>
+                            <div class="glass-card rounded-xl p-md">
+                                <div class="flex justify-between items-center mb-md">
+                                    <div class="flex items-center gap-md">
+                                        <span class="material-symbols-outlined text-primary">trending_up</span>
+                                        <div>
+                                            <p class="font-headline-sm text-headline-sm text-on-surface">Proactive</p>
+                                            <p class="font-body-md text-on-surface-variant">Anticipates technical debt before implementation.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="h-[1px] bg-outline-variant/30 w-full mb-md"></div>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center gap-md">
+                                        <span class="material-symbols-outlined text-primary">groups</span>
+                                        <div>
+                                            <p class="font-headline-sm text-headline-sm text-on-surface">Collaborative</p>
+                                            <p class="font-body-md text-on-surface-variant">Emphasizes mentorship and knowledge sharing.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                    <BottomNav />
+                </div>
+            );
+        };
+
+        // --- Main App Setup ---
+
+        const App = () => {
+            return (
+                <MemoryRouter>
+                    <Routes>
+                        <Route path="/" element={<CandidateOverview />} />
+                        <Route path="/comparison" element={<ComparisonDashboard />} />
+                        <Route path="/skills" element={<SkillsIntelligence />} />
+                        <Route path="/live" element={<InterviewIntelligence />} />
+                    </Routes>
+                </MemoryRouter>
+            );
+        };
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
